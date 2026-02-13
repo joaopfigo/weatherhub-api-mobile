@@ -1,5 +1,6 @@
 package com.joaopedro.weatherhub.service;
 
+import com.joaopedro.weatherhub.exception.ResourceNotFoundException;
 import com.joaopedro.weatherhub.model.FavoriteCity;
 import com.joaopedro.weatherhub.repository.FavoriteCityRepository;
 import org.springframework.stereotype.Service;
@@ -16,12 +17,12 @@ public class FavoriteCityService {
         this.favoriteCityRepository = favoriteCityRepository;
     }
 
-    public List<FavoriteCity> listByUserId(Long userId) {
+    public List<FavoriteCity> listarFavoritosDoUsuario(Long userId) {
         return favoriteCityRepository.findByUserId(userId);
     }
 
-    public FavoriteCity add(Long userId, FavoriteCity favoriteCity) {
-        favoriteCity.setId(null);
+    public FavoriteCity adicionarCidadeFavorita(Long userId, FavoriteCity favoriteCity) {
+        favoriteCity.setId(null);// Garante que é um novo registro, não atualiza
 
         favoriteCity.setUserId(userId);
 
@@ -30,9 +31,9 @@ public class FavoriteCityService {
         return favoriteCityRepository.save(favoriteCity);
     }
 
-    public void remove(Long userId, Long cityId) {
+    public void excluirFavoritoDoUsuario(Long userId, Long cityId) {
         FavoriteCity favorite = favoriteCityRepository.findByIdAndUserId(cityId, userId)
-                .orElseThrow(() -> new RuntimeException(
+                .orElseThrow(() -> new ResourceNotFoundException(
                         "Favorito não encontrado para o usuário " + userId + " com id " + cityId
                 ));
 

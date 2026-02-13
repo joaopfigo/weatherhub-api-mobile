@@ -10,7 +10,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users/{userId}/favorites")
 public class FavoriteCityController {
-
+    //@PathVariable = Indica que o valor do parâmetro userId será extraído da URL da requisição.
+    //@RequestBody = Indica que o corpo da requisição deve ser convertido em um objeto FavoriteCity.
     private final FavoriteCityService favoriteCityService;
 
     public FavoriteCityController(FavoriteCityService favoriteCityService) {
@@ -18,19 +19,19 @@ public class FavoriteCityController {
     }
 
     @GetMapping
-    public List<FavoriteCity> list(@PathVariable Long userId) {
-        return favoriteCityService.listByUserId(userId);
+    public List<FavoriteCity> listarFavoritosDoUsuario(@PathVariable Long userId) {
+        return favoriteCityService.listarFavoritosDoUsuario(userId);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public FavoriteCity add(@PathVariable Long userId, @RequestBody FavoriteCity favoriteCity) {
-        return favoriteCityService.add(userId, favoriteCity);
+    public FavoriteCity adicionarCidadeFavorita(@PathVariable Long userId, @RequestBody FavoriteCity favoriteCity) {
+        return favoriteCityService.adicionarCidadeFavorita(userId, favoriteCity);
     }
 
     @DeleteMapping("/{cityId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void remove(@PathVariable Long userId, @PathVariable Long cityId) {
-        favoriteCityService.remove(userId, cityId);
+    public void excluirFavoritoDoUsuario(@PathVariable Long userId, @PathVariable Long cityId) {
+        favoriteCityService.excluirFavoritoDoUsuario(userId, cityId);
     }
 }

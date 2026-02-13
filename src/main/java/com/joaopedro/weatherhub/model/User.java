@@ -1,6 +1,8 @@
 package com.joaopedro.weatherhub.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
 
@@ -10,7 +12,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Nome é obrigatório")
     private String name;
+
+    @NotBlank(message = "E‑mail é obrigatório")
+    @Email(message = "E‑mail inválido")
     private String email;
     private LocalDateTime createdAt;
 

@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
@@ -13,9 +15,16 @@ public class FavoriteCity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long userId;
+    @NotBlank(message = "Nome da cidade é obrigatório")
     private String cityName;
+
+    @NotBlank(message = "País é obrigatório")
     private String country;
+
+    @NotNull(message = "Latitude é obrigatória")
     private Double latitude;
+
+    @NotNull(message = "Longitude é obrigatória")
     private Double longitude;
     private LocalDateTime addedAt;
 

@@ -18,20 +18,20 @@ public class SearchHistoryController {
     }
 
     @GetMapping
-    public List<SearchHistory> list(@PathVariable Long userId) {
-        return searchHistoryService.listByUserId(userId);
+    public List<SearchHistory> listarHistoricoPorUsuario(@PathVariable Long userId) {
+        return searchHistoryService.listarHistoricoPorUsuario(userId);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public SearchHistory add(@PathVariable Long userId, @RequestBody SearchHistory history) {
-        return searchHistoryService.add(userId, history);
+    public SearchHistory adicionarBusca(@PathVariable Long userId, @RequestBody SearchHistory history) {
+        return searchHistoryService.adicionarBusca(userId, history);
     }
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void clear(@PathVariable Long userId) {
-        searchHistoryService.clear(userId);
+    public void limparHistorico(@PathVariable Long userId) {
+        searchHistoryService.limparHistorico(userId);
     }
 }
 

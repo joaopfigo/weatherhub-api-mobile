@@ -17,11 +17,11 @@ public class SearchHistoryService {
         this.searchHistoryRepository = searchHistoryRepository;
     }
 
-    public List<SearchHistory> listByUserId(Long userId) {
+    public List<SearchHistory> listarHistoricoPorUsuario(Long userId) {
         return searchHistoryRepository.findByUserId(userId);
     }
 
-    public SearchHistory add(Long userId, SearchHistory history) {
+    public SearchHistory adicionarBusca(Long userId, SearchHistory history) {
         history.setId(null);// Garante que é um novo registro, não atualiza
 
         history.setUserId(userId);
@@ -32,7 +32,7 @@ public class SearchHistoryService {
     }
 
     @Transactional
-    public void clear(Long userId) {
+    public void limparHistorico(Long userId) {
         searchHistoryRepository.deleteByUserId(userId);
     }
 }

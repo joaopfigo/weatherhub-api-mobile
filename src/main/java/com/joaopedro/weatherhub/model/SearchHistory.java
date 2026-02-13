@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
@@ -13,8 +15,13 @@ public class SearchHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long userId;
+    @NotBlank(message = "Nome da cidade é obrigatório")
     private String cityName;
+
+    @NotNull(message = "Temperatura é obrigatória")
     private Double temperature;
+
+    @NotBlank(message = "Condição é obrigatória")
     private String condition;
     private LocalDateTime searchedAt;
 
