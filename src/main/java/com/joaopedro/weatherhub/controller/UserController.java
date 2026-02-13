@@ -15,9 +15,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
+    @PostMapping //m
     @ResponseStatus(HttpStatus.CREATED)
-    public User create(@RequestBody User user) { //os dados do JSON que vieram do pedido devem virar um objeto
+    public User create(@RequestBody User user) { //Pega o JSON que veio no corpo da requisição e transforme em objeto Java.
         return userService.create(user);
     }
 
